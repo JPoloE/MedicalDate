@@ -18,7 +18,7 @@ namespace Patient.UseCase.UseCase
             _patientRepository = patientRepository;
         }
 
-        public async Task<InsetNewPatient> AgregatePatient(InsetNewPatient newPatient)
+        public async Task<Entity.Entity.Patient> AgregatePatient(Entity.Entity.Patient newPatient)
         {
             return await _patientRepository.InsertPatientAsync(newPatient);
         }

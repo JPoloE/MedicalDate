@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using Patient.Infrastructure.Interface;
 using Patient.Infrastructure.MongoEntity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Patient.Infrastructure
 {
-    public class Context
+    public class Context : IContext
     {
         private readonly IMongoDatabase _database;
 

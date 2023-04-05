@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patient.Entity.Commands
 {
-    public class InsetNewPatient
+    public class InsertNewPatient
     {
         public string Name { get; set; }
         public string Last_Name { get; set; }

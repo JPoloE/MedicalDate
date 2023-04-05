@@ -49,7 +49,7 @@ namespace Patient.Infrastructure.PatientRepository
             return listPatients;
         }
 
-        public async Task<InsetNewPatient> InsertPatientAsync(InsetNewPatient newPatient)
+        public async Task<Entity.Entity.Patient> InsertPatientAsync(Entity.Entity.Patient newPatient)
         {
             var savePatient = _mapper.Map<PatientEntity>(newPatient);
             await _collection.InsertOneAsync(savePatient);
