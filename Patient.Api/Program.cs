@@ -6,6 +6,7 @@ using Patient.UseCase.Gateway;
 using Patient.UseCase.UseCase;
 using Patient.UseCase.Gateway.Repository;
 using Patient.Infrastructure.PatientRepository;
+using Bank.AppService.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(config => config.AddDataReaderMapping(), typeof(ConfigurationProfile));
-builder.Services.AddSingleton<IContext>(provider => new Context(builder.Configuration.GetConnectionString("DefaultConnection"), "test"));
+builder.Services.AddSingleton<IContext>(provider => new Context(builder.Configuration.GetConnectionString("DefaultConnection"), "Patient"));
 
 builder.Services.AddScoped<IPatientUseCase, PatientUseCase>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
@@ -34,6 +35,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorHandleMiddleware>();
 
 app.MapControllers();
 
