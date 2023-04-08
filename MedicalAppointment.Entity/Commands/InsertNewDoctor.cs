@@ -13,5 +13,6 @@ namespace MedicalAppointment.Entity.Commands
         public string Specialty { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public bool State { get; set; }
     }
 }

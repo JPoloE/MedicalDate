@@ -8,6 +8,7 @@ namespace Patient.Entity.Commands
 {
     public class InsertNewPatient
     {
+        public string Fire_Id { get; set; }
         public string Name { get; set; }
         public string Last_Name { get; set; }
         public decimal Card_Id { get; set; }

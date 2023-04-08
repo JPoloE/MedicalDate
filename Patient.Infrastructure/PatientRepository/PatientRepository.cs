@@ -51,6 +51,7 @@ namespace Patient.Infrastructure.PatientRepository
         {
             Guard.Against.Null(newPatient, nameof(newPatient));
             Guard.Against.NullOrEmpty(newPatient.Name, nameof(newPatient.Name), "Name Required. ");
+            Guard.Against.NullOrEmpty(newPatient.Fire_Id, nameof(newPatient.Fire_Id), "Id Required. ");
             Guard.Against.NullOrEmpty(newPatient.Last_Name, nameof(newPatient.Last_Name), "Last Name Required. ");
             Guard.Against.NullOrEmpty(newPatient.Card_Id.ToString(), nameof(newPatient.Card_Id), "Card Id required. ");
             Guard.Against.NullOrEmpty(newPatient.Email, nameof(newPatient.Email), "Email required. ");

@@ -8,11 +8,12 @@ namespace MedicalAppointment.Entity.Entities
 {
     public class Doctor
     {
-        public string Id_Doctor { get; set; }
+        public int Id_Doctor { get; set; }
         public string Name { get; set; }
         public string Last_Name { get; set; }
         public string Specialty { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public bool State { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MedicalAppointment.Entity.Entities;
+﻿using MedicalAppointment.Entity.Commands;
+using MedicalAppointment.Entity.Entities;
 using MedicalAppointment.UseCase.Gateway;
 using MedicalAppointment.UseCase.Gateway.Repository;
 using System;
@@ -18,24 +19,24 @@ namespace MedicalAppointment.UseCase.UseCase
             _doctorRepository = doctorRepository;
         }
 
-        public Task<Doctor> AgregateDoctor(Doctor Doctor)
+        public async Task<InsertNewDoctor> AgregateDoctor(InsertNewDoctor Doctor)
         {
-            return _doctorRepository.InsertDoctorAsync(Doctor);
+            return await _doctorRepository.InsertDoctorAsync(Doctor);
         }
 
-        public Task<string> DeleteDoctor(string IdDoctor)
+        public async Task<string> DeleteDoctor(int IdDoctor)
         {
-            return _doctorRepository.DeleteDoctorByIdAsync(IdDoctor);
+            return await _doctorRepository.DeleteDoctorByIdAsync(IdDoctor);
         }
 
-        public Task<List<Doctor>> ListAllDoctors()
+        public async Task<List<Doctor>> ListAllDoctors()
         {
-            return _doctorRepository.GetAllDoctorsAsync();
+            return await _doctorRepository.GetAllDoctorsAsync();
         }
 
-        public Task<Doctor> UpdateDoctor(Doctor Doctor)
+        public async Task<Doctor> UpdateDoctor(Doctor Doctor)
         {
-            return _doctorRepository.UpdateDoctorAsync(Doctor);
+            return await _doctorRepository.UpdateDoctorAsync(Doctor);
         }
     }
 }
