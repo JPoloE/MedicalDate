@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -92,9 +93,29 @@ namespace MedicalAppointment.Infrastructure.Repository
             return Doctor;
         }
 
-        public Task<Doctor> UpdateDoctorAsync(Doctor Doctor)
+        public async Task<Doctor> UpdateDoctorAsync(Doctor Doctor)
         {
-            throw new NotImplementedException();
+            using (var conn = await _dbConnectionBuilder.CreateConnectionAsync())
+            {
+                // Verificar si existe un doctor con el mismo correo electrónico
+                var sql = "SELECT COUNT(*) FROM Doctor WHERE Email = @Email AND Id_Doctor <> @Id_Doctor";
+                var count = await conn.ExecuteScalarAsync<int>(sql, new { Email = Doctor.Email, Id_Doctor = Doctor.Id_Doctor });
+
+                if (count > 0)
+                {
+                    throw new Exception("Ya existe un doctor con el mismo correo electrónico.");
+                }
+
+                // Actualizar los datos del doctor
+                sql = "UPDATE Doctor SET Name = @Name, Last_Name = @Last_Name, Specialty = @Specialty, Phone = @Phone, Email = @Email, State = @State WHERE Id_Doctor = @Id_Doctor";
+                await conn.ExecuteAsync(sql, new { Name = Doctor.Name, Last_Name = Doctor.Last_Name, Specialty = Doctor.Specialty, Phone = Doctor.Phone, Email = Doctor.Email, State = Doctor.State, Id_Doctor = Doctor.Id_Doctor });
+
+                // Cargar los datos actualizados del doctor
+                sql = "SELECT * FROM Doctor WHERE Id_Doctor = @Id_Doctor";
+                var updatedDoctor = await conn.QueryFirstOrDefaultAsync<Doctor>(sql, new { Id_Doctor = Doctor.Id_Doctor });
+
+                return updatedDoctor;
+            }
         }
     }
 }
