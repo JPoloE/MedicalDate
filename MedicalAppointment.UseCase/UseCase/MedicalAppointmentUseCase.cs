@@ -1,4 +1,5 @@
-﻿using MedicalAppointment.UseCase.Gateway;
+﻿using MedicalAppointment.Entity.Commands;
+using MedicalAppointment.UseCase.Gateway;
 using MedicalAppointment.UseCase.Gateway.Repository;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,12 @@ namespace MedicalAppointment.UseCase.UseCase
             _medicalAppointmentRepository = medicalAppointmentRepository;
         }
 
-        public async Task<Entity.Entities.MedicalAppointment> AgregateDoctor(Entity.Entities.MedicalAppointment Medical)
-        {
-            return await _medicalAppointmentRepository.InsertMedicalAsync(Medical);
-        }
-
         public async Task<List<Entity.Entities.MedicalAppointment>> ListAllMedicals()
         {
             return await _medicalAppointmentRepository.GetAllMedicalsAsync();
         }
 
-        public async Task<string> DeleteMedical(string IdMedical)
+        public async Task<string> DeleteMedical(int IdMedical)
         {
             return await _medicalAppointmentRepository.DeleteMedicalByIdAsync(IdMedical);
         }
@@ -38,5 +34,9 @@ namespace MedicalAppointment.UseCase.UseCase
             return await _medicalAppointmentRepository.UpdateMedicalAsync(Medical);
         }
 
+        public async Task<InsertNewMedialAppointment> AgregateDoctor(InsertNewMedialAppointment Medical)
+        {
+            return await _medicalAppointmentRepository.InsertMedicalAsync(Medical);
+        }
     }
 }

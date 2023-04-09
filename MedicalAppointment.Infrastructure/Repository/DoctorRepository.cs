@@ -82,6 +82,15 @@ namespace MedicalAppointment.Infrastructure.Repository
                 State = Doctor.State
             };
 
+            // Verificar si existe un doctor con el mismo correo electrónico
+            string emailQuery = $"SELECT COUNT(*) FROM {nombreTabla} WHERE Email = @Email";
+            int count = await connection.ExecuteScalarAsync<int>(emailQuery, new { Email = Doctor.Email });
+
+            if (count > 0)
+            {
+                throw new Exception("Ya existe un doctor con el mismo correo electrónico.");
+            }
+
             // Insertar la nueva cuenta y obtener su Id_Doctor.
             string insertDoctorQuery = $"INSERT INTO {nombreTabla} (Name, Last_Name, Specialty, Phone, Email, State) " +
                 $"VALUES (@Name, @Last_Name, @Specialty, @Phone, @Email, @State); " +

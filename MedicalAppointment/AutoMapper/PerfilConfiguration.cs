@@ -10,6 +10,7 @@ namespace MedicalAppointment.AutoMapper
         public PerfilConfiguration() 
         {
             CreateMap<InsertNewDoctor, Doctor>().ReverseMap();
+            CreateMap<InsertNewMedialAppointment, Doctor>().ReverseMap();
         }
         
         

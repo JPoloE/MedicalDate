@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicalAppointment.Entity.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace MedicalAppointment.UseCase.Gateway
 {
     public interface IMedicalAppointmentUseCase
     {
-        Task<Entity.Entities.MedicalAppointment> AgregateDoctor(Entity.Entities.MedicalAppointment Medical);
+        Task<InsertNewMedialAppointment> AgregateDoctor(InsertNewMedialAppointment Medical);
         Task<List<Entity.Entities.MedicalAppointment>> ListAllMedicals();
-        Task<string> DeleteMedical(string IdMedical);
+        Task<string> DeleteMedical(int IdMedical);
         Task<Entity.Entities.MedicalAppointment> UpdateMedical(Entity.Entities.MedicalAppointment Medical);
     }
 }

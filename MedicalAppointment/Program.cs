@@ -6,6 +6,7 @@ using MedicalAppointment.UseCase.Gateway;
 using MedicalAppointment.UseCase.UseCase;
 using MedicalAppointment.UseCase.Gateway.Repository;
 using MedicalAppointment.Infrastructure.Repository;
+using Bank.AppService.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,9 @@ builder.Services.AddAutoMapper(config => config.AddDataReaderMapping(), typeof(P
 
 builder.Services.AddScoped<IDoctorUseCase, DoctorUseCase>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+
+builder.Services.AddScoped<IMedicalAppointmentUseCase, MedicalAppointmentUseCase>();
+builder.Services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
 
 builder.Services.AddTransient<IDbConnectionBuilder>(e =>
 {
@@ -37,6 +41,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorHandleMiddleware>();
 
 app.MapControllers();
 

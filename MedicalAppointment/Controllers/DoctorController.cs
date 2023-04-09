@@ -26,7 +26,7 @@ namespace MedicalAppointment.Controllers
         }
 
         [HttpPost]
-        public async Task<InsertNewDoctor> Registrar_Director(InsertNewDoctor doctor)
+        public async Task<InsertNewDoctor> RegisterDoctor(InsertNewDoctor doctor)
         {
             return await _doctorUseCase.AgregateDoctor(doctor);
         }
