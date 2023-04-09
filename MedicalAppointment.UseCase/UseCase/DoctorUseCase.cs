@@ -24,6 +24,11 @@ namespace MedicalAppointment.UseCase.UseCase
             return await _doctorRepository.InsertDoctorAsync(Doctor);
         }
 
+        public async Task<string> ChangeDoctorState(int doctorId)
+        {
+            return await _doctorRepository.ChangeDoctorStateAsync(doctorId);
+        }
+
         public async Task<string> DeleteDoctor(int IdDoctor)
         {
             return await _doctorRepository.DeleteDoctorByIdAsync(IdDoctor);

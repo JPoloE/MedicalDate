@@ -13,5 +13,7 @@ namespace MedicalAppointment.UseCase.Gateway.Repository
         Task<List<Entity.Entities.MedicalAppointment>> GetAllMedicalsAsync();
         Task<string> DeleteMedicalByIdAsync(int IdMedical);
         Task<Entity.Entities.MedicalAppointment> UpdateMedicalAsync(Entity.Entities.MedicalAppointment Medical);
+        Task<List<Entity.Entities.MedicalAppointment>> GetMedicalAppointmentsByDoctorGroupedByDayAsync(int doctorId);
+        Task<List<Entity.Entities.MedicalAppointment>> GetMedicalAppointmentsByPatientGroupedByDayAsync(string patientId);
     }
 }

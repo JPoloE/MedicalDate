@@ -24,6 +24,30 @@ namespace MedicalAppointment.Infrastructure.Repository
             _dbConnectionBuilder = dbConnectionBuilder;
         }
 
+        public async Task<string> ChangeDoctorStateAsync(int doctorId)
+        {
+            using (var conn = await _dbConnectionBuilder.CreateConnectionAsync())
+            {
+                var doctor = await conn.QuerySingleOrDefaultAsync<Doctor>("SELECT * FROM Doctor WHERE Id_Doctor = @doctorId", new { doctorId });
+
+                if (doctor == null) // El doctor no existe en la base de datos
+                {
+                    return "El doctor no existe en la base de datos";
+                }
+
+                doctor.State = !doctor.State; // Cambiar el estado del doctor
+
+                var rowsAffected = await conn.ExecuteAsync("UPDATE Doctor SET State = @State WHERE Id_Doctor = @doctorId", new { doctor.State, doctorId });
+
+                if (rowsAffected == 0) // No se afectó ninguna fila
+                {
+                    return "No se pudo cambiar el estado del doctor";
+                }
+
+                return $"El doctor ha sido {(doctor.State ? "activado" : "desactivado")} exitosamente";
+            }
+        }
+
         public async Task<string> DeleteDoctorByIdAsync(int IdDoctor)
         {
             using (var conn = await _dbConnectionBuilder.CreateConnectionAsync())

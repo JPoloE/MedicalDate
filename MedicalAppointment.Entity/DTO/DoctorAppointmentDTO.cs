@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalAppointment.Entity.Entities
+namespace MedicalAppointment.Entity.DTO
 {
-    public class MedicalAppointment
+    public class DoctorAppointmentDTO
     {
         public int Id_MedicalAppointment { get; set; }
-        public string Id_Patient { get; set; }
-        public int Id_Doctor { get; set; }
+        public int Id_Patient { get; set; }
         public DateTime Date { get; set; }
         public string Reason { get; set; }
         public string Details { get; set; }
-        public string Specialty { get; set; }
+        public string AppointmentSpecialty { get; set; }
     }
 }

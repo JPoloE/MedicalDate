@@ -42,6 +42,11 @@ namespace MedicalAppointment.Controllers
         {
             return await _doctorUseCase.UpdateDoctor(doctor);
         }
-       
+
+        [HttpPut("{doctorId}")]
+        public async Task<string> ChangeDoctorState(int doctorId)
+        {
+            return await _doctorUseCase.ChangeDoctorState(doctorId);
+        }
     }
 }

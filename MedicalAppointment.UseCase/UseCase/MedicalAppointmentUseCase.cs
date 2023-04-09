@@ -38,5 +38,15 @@ namespace MedicalAppointment.UseCase.UseCase
         {
             return await _medicalAppointmentRepository.InsertMedicalAsync(Medical);
         }
+
+        public async Task<List<Entity.Entities.MedicalAppointment>> GetMedicalAppointmentsByDoctorAsync(int doctorId)
+        {
+            return await _medicalAppointmentRepository.GetMedicalAppointmentsByDoctorGroupedByDayAsync(doctorId);
+        }
+
+        public async Task<List<Entity.Entities.MedicalAppointment>> GetMedicalAppointmentsByPatientAsync(string patientId)
+        {
+            return await _medicalAppointmentRepository.GetMedicalAppointmentsByPatientGroupedByDayAsync(patientId);
+        }
     }
 }

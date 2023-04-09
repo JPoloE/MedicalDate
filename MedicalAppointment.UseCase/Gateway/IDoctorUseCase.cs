@@ -13,5 +13,6 @@ namespace MedicalAppointment.UseCase.Gateway
         Task<List<Entity.Entities.Doctor>> ListAllDoctors();
         Task<string> DeleteDoctor(int IdDoctor);
         Task<Entity.Entities.Doctor> UpdateDoctor(Entity.Entities.Doctor Doctor);
+        Task<string> ChangeDoctorState(int doctorId);
     }
 }
