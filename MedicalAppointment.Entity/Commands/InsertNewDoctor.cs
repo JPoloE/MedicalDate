@@ -8,11 +8,13 @@ namespace MedicalAppointment.Entity.Commands
 {
     public class InsertNewDoctor
     {
+        public string Id_Fire { get; set; }
         public string Name { get; set; }
         public string Last_Name { get; set; }
         public string Specialty { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public bool State { get; set; }
+        public int Role { get; set; }
     }
 }

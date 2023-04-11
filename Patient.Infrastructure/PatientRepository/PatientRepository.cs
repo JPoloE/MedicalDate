@@ -57,6 +57,7 @@ namespace Patient.Infrastructure.PatientRepository
             Guard.Against.NullOrEmpty(newPatient.Email, nameof(newPatient.Email), "Email required. ");
             Guard.Against.NullOrEmpty(newPatient.Address, nameof(newPatient.Address), "Address required. ");
             Guard.Against.NullOrEmpty(newPatient.Phone, nameof(newPatient.Phone), "Phone required. ");
+            Guard.Against.NullOrEmpty(newPatient.Role.ToString(), nameof(newPatient.Role), "Role required. ");
 
             var savePatient = _mapper.Map<PatientEntity>(newPatient);
             await _collection.InsertOneAsync(savePatient);
@@ -72,6 +73,7 @@ namespace Patient.Infrastructure.PatientRepository
             Guard.Against.NullOrEmpty(patient.Email, nameof(patient.Email), "Email required. ");
             Guard.Against.NullOrEmpty(patient.Address, nameof(patient.Address), "Address required. ");
             Guard.Against.NullOrEmpty(patient.Phone, nameof(patient.Phone), "Phone required. ");
+            Guard.Against.NullOrEmpty(patient.Role.ToString(), nameof(patient.Role), "Role required. ");
 
             var updatePatient = _mapper.Map<PatientEntity>(patient);
             var upPatient = await _collection.FindOneAndReplaceAsync(patientEntity => patientEntity.Patient_Id

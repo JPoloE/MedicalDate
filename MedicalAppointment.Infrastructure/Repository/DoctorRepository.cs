@@ -98,12 +98,14 @@ namespace MedicalAppointment.Infrastructure.Repository
 
             var insertNewDoctor = new
             {
+                Id_Fire = Doctor.Id_Fire,
                 Name = Doctor.Name,
                 Last_Name = Doctor.Last_Name,
                 Specialty = Doctor.Specialty,
                 Phone = Doctor.Phone,
                 Email = Doctor.Email,
-                State = Doctor.State
+                State = Doctor.State,
+                Role = Doctor.Role
             };
 
             // Verificar si existe un doctor con el mismo correo electrónico
@@ -116,8 +118,8 @@ namespace MedicalAppointment.Infrastructure.Repository
             }
 
             // Insertar la nueva cuenta y obtener su Id_Doctor.
-            string insertDoctorQuery = $"INSERT INTO {nombreTabla} (Name, Last_Name, Specialty, Phone, Email, State) " +
-                $"VALUES (@Name, @Last_Name, @Specialty, @Phone, @Email, @State); " +
+            string insertDoctorQuery = $"INSERT INTO {nombreTabla} (Id_Fire, Name, Last_Name, Specialty, Phone, Email, State, Role) " +
+                $"VALUES (@Id_Fire, @Name, @Last_Name, @Specialty, @Phone, @Email, @State, @Role); " +
                 $"SELECT SCOPE_IDENTITY();";
             int doctor_Id = await connection.ExecuteScalarAsync<int>(insertDoctorQuery, insertNewDoctor);
 
@@ -140,8 +142,8 @@ namespace MedicalAppointment.Infrastructure.Repository
                 }
 
                 // Actualizar los datos del doctor
-                sql = "UPDATE Doctor SET Name = @Name, Last_Name = @Last_Name, Specialty = @Specialty, Phone = @Phone, Email = @Email, State = @State WHERE Id_Doctor = @Id_Doctor";
-                await conn.ExecuteAsync(sql, new { Name = Doctor.Name, Last_Name = Doctor.Last_Name, Specialty = Doctor.Specialty, Phone = Doctor.Phone, Email = Doctor.Email, State = Doctor.State, Id_Doctor = Doctor.Id_Doctor });
+                sql = "UPDATE Doctor SET Id_Fire = @Id_Fire, Name = @Name, Last_Name = @Last_Name, Specialty = @Specialty, Phone = @Phone, Email = @Email, State = @State, Role = @Role WHERE Id_Doctor = @Id_Doctor";
+                await conn.ExecuteAsync(sql, new { Id_Fire = Doctor.Id_Fire, Name = Doctor.Name, Last_Name = Doctor.Last_Name, Specialty = Doctor.Specialty, Phone = Doctor.Phone, Email = Doctor.Email, State = Doctor.State, Role = Doctor.Role, Id_Doctor = Doctor.Id_Doctor });
 
                 // Cargar los datos actualizados del doctor
                 sql = "SELECT * FROM Doctor WHERE Id_Doctor = @Id_Doctor";

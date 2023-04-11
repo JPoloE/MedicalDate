@@ -16,5 +16,6 @@ namespace Patient.Entity.Commands
         public string Address { get; set; }
         public string Phone { get; set; }
         public bool State { get; set; }
+        public int Role { get; set; }
     }
 }
